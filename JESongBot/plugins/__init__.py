@@ -1,4 +1,4 @@
-# Infinity BOTs <https://t.me/Infinity_BOTs>
+# MrC《》VENOM <https://t.me/MrC_VENOM>
 
 from os.path import dirname, basename, isfile, join
 import glob
