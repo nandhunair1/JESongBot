@@ -1,11 +1,11 @@
-# MrC《》VENOM <https://t.me/MrC_VENOM>
+# Infinity BOTs <https://t.me/Infinity_BOTs>
 
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
-from Mary_moodybot.plugins import *
+from JESongBot.plugins import *
 from pyrogram import idle, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from Mary_moodybot import Jebot as app
-from Mary_moodybot import LOGGER
+from JESongBot import Jebot as app
+from JESongBot import LOGGER
 
 pm_start_text = """
 Heya [{}](tg://user?id={}), I'm 💓മേരി ചേച്ചി💓 Song Downloader Bot 🎵
@@ -27,10 +27,10 @@ async def start(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        text="😎 Developer 😎", url="https://t.me/MrC_VENOM"
+                        text="😎 Developer😎", url="https://t.me/MrC_VENOM"
                     ),
                     InlineKeyboardButton(
-                        text="🎈 Support Group 🎈", url="https://t.me/tvseriezzz"
+                        text="❣ Support Group ❣", url="https://t.me/tvseriezzz"
                     )
                 ]
             ]
@@ -41,5 +41,5 @@ async def start(client, message):
 
 
 app.start()
-LOGGER.info("💓മേരി ചേച്ചി💓Bot is online.")
+LOGGER.info("💓മേരി ചേച്ചി💓 is online.")
 idle()
