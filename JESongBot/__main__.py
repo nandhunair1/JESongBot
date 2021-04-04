@@ -1,7 +1,7 @@
 # MrC《》VENOM <https://t.me/MrC_VENOM>
 
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
-from 💓മേരി ചേച്ചി💓Bot.plugins import *
+from Mary_moodybot.plugins import *
 from pyrogram import idle, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from Mary_moodybot import Jebot as app
