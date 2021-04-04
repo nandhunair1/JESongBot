@@ -1,4 +1,4 @@
-# Infinity BOTs <https://t.me/Infinity_BOTs>
+# MrC《》VENOM <https://t.me/MrC_VENOM>
 
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
 from JESongBot.plugins import *
@@ -8,12 +8,12 @@ from JESongBot import Jebot as app
 from JESongBot import LOGGER
 
 pm_start_text = """
-Heya [{}](tg://user?id={}), I'm Song Downloader Bot 🎵
+Heya [{}](tg://user?id={}), I'm 💓മേരി ചേച്ചി💓 Song Downloader Bot 🎵
 
 Just send me the song name you want to download.
-eg: ```/song Satisfya```
+eg: ```/song Faded```
 
-A bot by @Infinity_BOTs
+A bot by @MrC_VENOM
 """
 
 
@@ -27,10 +27,10 @@ async def start(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        text="Source", url="https://github.com/ImJanindu/JESongBot"
+                        text="😎 Developer 😎", url="https://t.me/MrC_VENOM"
                     ),
                     InlineKeyboardButton(
-                        text="Dev", url="https://t.me/ImJanindu"
+                        text="🎈 Support Group 🎈", url="https://t.me/tvseriezzz"
                     )
                 ]
             ]
@@ -41,5 +41,5 @@ async def start(client, message):
 
 
 app.start()
-LOGGER.info("JESongBot is online.")
+LOGGER.info("💓മേരി ചേച്ചി💓Bot is online.")
 idle()
