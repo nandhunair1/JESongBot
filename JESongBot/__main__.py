@@ -1,11 +1,11 @@
 # MrC《》VENOM <https://t.me/MrC_VENOM>
 
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
-from JESongBot.plugins import *
+from 💓മേരി ചേച്ചി💓Bot.plugins import *
 from pyrogram import idle, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from JESongBot import Jebot as app
-from JESongBot import LOGGER
+from 💓മേരി ചേച്ചി💓Bot import Jebot as app
+from 💓മേരി ചേച്ചി💓Bot import LOGGER
 
 pm_start_text = """
 Heya [{}](tg://user?id={}), I'm 💓മേരി ചേച്ചി💓 Song Downloader Bot 🎵
