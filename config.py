@@ -1,4 +1,4 @@
-# MrC《》VENOM
+# MrC《》VENOM <https://t.me/MrC_VENOM>
 
 import os
 API_ID = int(os.getenv("API_ID"))
