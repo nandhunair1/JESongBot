@@ -8,7 +8,7 @@ from JESongBot import Jebot as app
 from JESongBot import LOGGER
 
 pm_start_text = """
-Heya [{}](tg://user?id={}), I'm മേരി ചേച്ചി Song Downloader Bot 🎵
+Heya [{}](tg://user?id={}), I'm 💓മേരി ചേച്ചി💓 Song Downloader Bot 🎵
 
 Just send me the song name you want to download.
 eg: ```/song Faded```
@@ -41,5 +41,5 @@ async def start(client, message):
 
 
 app.start()
-LOGGER.info("marymoody is online.")
+LOGGER.info("JESongBot is online.")
 idle()
