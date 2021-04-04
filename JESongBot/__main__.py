@@ -4,8 +4,8 @@ from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
 from 💓മേരി ചേച്ചി💓Bot.plugins import *
 from pyrogram import idle, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from 💓മേരി ചേച്ചി💓Bot import Jebot as app
-from 💓മേരി ചേച്ചി💓Bot import LOGGER
+from Mary_moodybot import Jebot as app
+from Mary_moodybot import LOGGER
 
 pm_start_text = """
 Heya [{}](tg://user?id={}), I'm 💓മേരി ചേച്ചി💓 Song Downloader Bot 🎵
