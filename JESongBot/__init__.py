@@ -10,4 +10,4 @@ logging.basicConfig(
 
 LOGGER = logging.getLogger(__name__)
 
-Jebot = Client("💓മേരി ചേച്ചി💓Bot", bot_token=BOT_TOKEN, api_hash=API_HASH, api_id=API_ID)
+Jebot = Client("marymoody", bot_token=BOT_TOKEN, api_hash=API_HASH, api_id=API_ID)
