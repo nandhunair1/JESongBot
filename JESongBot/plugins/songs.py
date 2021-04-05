@@ -1,5 +1,5 @@
-# Plugin by @MrC_VENOM
-# MrC《》VENOM <https://t.me/MrC_VENOM>
+# Plugin by @Mr_Dark_Prince
+# Infinity BOTs <https://t.me/Infinity_BOTs>
 
 import os
 import requests
@@ -54,7 +54,7 @@ def song(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = '**Uploaded by @Mary_moodybot**'
+        rep = '**Uploaded by marymoody**'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
