@@ -9,8 +9,8 @@
         "JE Bots"
     ],
     "website": "https://infinityje.com",
-    "repository": "https://github.com/nandhunair1/marymoody",
-    "success_url": "https://t.me/MrC_VENOM",
+    "repository": "https://github.com/ImJanindu/JESongBot",
+    "success_url": "https://t.me/Infinity_BOTs",
     "env": {
         "BOT_TOKEN": {
             "description": "Your Telegram Bot Token from @BotFather",
