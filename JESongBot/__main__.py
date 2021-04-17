@@ -1,5 +1,5 @@
-# Infinity BOTs <https://t.me/MrC_VENOM>
-# @MrC_VENOM
+# Infinity BOTs <https://t.me/Infinity_BOTs>
+# @ImJanindu
 
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
 from JESongBot.plugins import *
@@ -9,7 +9,7 @@ from JESongBot import Jebot as app
 from JESongBot import LOGGER
 
 pm_start_text = """
-Heya [{}](tg://user?id={}), I'm 💓മേരി ചേച്ചി💓 Song Downloader Bot 🎵
+Heya [{}](tg://user?id={}), I'm Song Downloader Bot 🎵
 
 Do /help for know my commands
 
