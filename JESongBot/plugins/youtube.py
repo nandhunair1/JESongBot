@@ -1,48 +1,93 @@
-# Infinity BOTs <https://t.me/Infinity_BOTs>
-
 import os
-import requests
-import aiohttp
-import youtube_dl
+import asyncio
+from urllib.parse import urlparse
+from pyrogram import Client, filters
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from youtube_dl import YoutubeDL
+from opencc import OpenCC
+from JESongBot import Jebot
 
-from JESongBot import Jebot as app
-from pyrogram import filters, Client
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputTextMessageContent
+YTDL_REGEX = (r"^((?:https?:)?\/\/)"
+              r"?((?:www|m)\.)"
+              r"?((?:youtube\.com|youtu\.be))"
+              r"(\/)([-a-zA-Z0-9()@:%_\+.~#?&//=]*)([\w\-]+)(\S+)?$")
+s2tw = OpenCC('s2tw.json').convert
 
-def time_to_seconds(time):
-    stringt = str(time)
-    return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
+@Jebot.on_message(filters.private
+                   & filters.text
+                   & ~filters.edited
+                   & filters.regex(YTDL_REGEX))
+async def ytdl_with_button(_, message: Message):
+    await message.reply_text(
+        "**Click download button to download youtube url on audio format👇**",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Download 🎵",
+                        callback_data="ytdl_audio"
+                    )
+                ]
+            ]
+        ),
+        quote=True
+    )
 
-@app.on_message(filters.command('yt'))
-def song(client, message):
-
-    user_id = message.from_user.id 
-    user_name = message.from_user.first_name 
-    rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"
-
-    query = ''
-    for i in message.command[1:]:
-        query += ' ' + str(i)
-    print(query)
-    link = query
-    m = message.reply('🔎 Finding the song...')
-    ydl_opts = {"format": "bestaudio[ext=m4a]"}
-    m.edit("Downloading...")
+@Jebot.on_callback_query(filters.regex("^ytdl_audio$"))
+async def callback_query_ytdl_audio(_, callback_query):
     try:
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            info_dict = ydl.extract_info(query, download=False)
-            audio_file = ydl.prepare_filename(info_dict)
+        url = callback_query.message.reply_to_message.text
+        ydl_opts = {
+            'format': 'bestaudio',
+            'outtmpl': '%(title)s - %(extractor)s-%(id)s.%(ext)s',
+            'writethumbnail': True
+        }
+        with YoutubeDL(ydl_opts) as ydl:
+            message = callback_query.message
+            await message.reply_chat_action("typing")
+            info_dict = ydl.extract_info(url, download=False)
+            # download
+            await callback_query.edit_message_text("**Downloading audio...**")
             ydl.process_info(info_dict)
-        rep = '@Infinity_BOTs'
-        
-        s = message.reply_audio(audio_file, caption=rep, parse_mode='md')
-        m.delete()
+            # upload
+            audio_file = ydl.prepare_filename(info_dict)
+            task = asyncio.create_task(send_audio(message, info_dict,
+                                                  audio_file))
+            while not task.done():
+                await asyncio.sleep(3)
+                await message.reply_chat_action("upload_document")
+            await message.reply_chat_action("cancel")
+            await message.delete()
     except Exception as e:
-        m.edit('❌ Error')
-        print(e)
+        await message.reply_text(e)
+    await callback_query.message.reply_to_message.delete()
+    await callback_query.message.delete()
 
-    try:
-        os.remove(audio_file)
-        os.remove(thumb_name)
-    except Exception as e:
-        print(e)
+
+async def send_audio(message: Message, info_dict, audio_file):
+    basename = audio_file.rsplit(".", 1)[-2]
+    # .webm -> .weba
+    if info_dict['ext'] == 'webm':
+        audio_file_weba = basename + ".weba"
+        os.rename(audio_file, audio_file_weba)
+        audio_file = audio_file_weba
+    # thumbnail
+    thumbnail_url = info_dict['thumbnail']
+    thumbnail_file = basename + "." + \
+        get_file_extension_from_url(thumbnail_url)
+    # info (s2tw)
+    webpage_url = info_dict['webpage_url']
+    title = s2tw(info_dict['title'])
+    caption = f"<b><a href=\"{webpage_url}\">{title}</a>\n\nUploaded by @Marysongbot</b>"
+    duration = int(float(info_dict['duration']))
+    performer = s2tw(info_dict['uploader'])
+    await message.reply_audio(audio_file, caption=caption, duration=duration,
+                              performer=performer, title=title,
+                              parse_mode='HTML', thumb=thumbnail_file)
+    os.remove(audio_file)
+    os.remove(thumbnail_file)
+
+def get_file_extension_from_url(url):
+    url_path = urlparse(url).path
+    basename = os.path.basename(url_path)
+    return basename.split(".")[-1]
