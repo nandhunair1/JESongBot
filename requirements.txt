@@ -8,5 +8,3 @@ asyncio
 wget
 aiofiles
 OpenCC
-ffmpeg-python
-Pillow
