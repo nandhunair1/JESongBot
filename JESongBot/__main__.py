@@ -1,33 +1,43 @@
-# Infinity BOTs <https://t.me/Infinity_BOTs>
-# @ImJanindu
+#    Copyright (C) 2021 - Infinity Bots
+#    This programme is a part of JEBotZ
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
 from JESongBot.plugins import *
 from pyrogram import idle, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from JESongBot import Jebot as app
+from JESongBot import bot
 from JESongBot import LOGGER
 
 pm_start_text = """
-Heya [{}](tg://user?id={}), I'm Song Downloader Bot 🎵
+Heya [{}](tg://user?id={}), I'm Song Bot 🎵
 
-Do /help for know my commands
+Do /help for know about me!
 
-A bot by @MrC_VENOM
+A bot by **@MrC_VENOM**
 """
 
 help_text = """
-My commands👇
+I can download HQ songs from YouTube Music
 
-- /song <song name>: download songs via Youtube
-- /saavn <song name>: download songs via JioSaavn
-- /deezer <song name>: download songs via Deezer
-- Send youtube url to my pm for download it on audio format
+**Syntax** - `/song [song name]`
 
-A bot by @MrC_VENOM
+A bot by **@MrC_VENOM**
 """
 
-@app.on_message(filters.command("start"))
+@bot.on_message(filters.command("start") & ~filters.edited)
 async def start(client, message):
     chat_id = message.chat.id
     user_id = message.from_user["id"]
@@ -37,22 +47,23 @@ async def start(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        text="😎 Developer 😎", url="https://t.me/MrC_VENOM"
+                        text="Support Group", url="https://t.me/tvseriezzz"
                     ),
                     InlineKeyboardButton(
-                        text="❣ Support Group ❣", url="https://t.me/tvseriezzz"
+                        text="Dev", url="https://t.me/MrC_VENOM"
                     )
                 ]
             ]
         )
+        await message.reply(pm_start_text.format(name, user_id), reply_markup=btn)
     else:
-        btn = None
-    await message.reply(pm_start_text.format(name, user_id), reply_markup=btn)
-
-@app.on_message(filters.command("help"))
+        start_text = "Heya [{}](tg://user?id={}), Song Bot is online ✅"
+        await message.reply(start_text.format(name, user_id))
+    
+@bot.on_message(filters.command("help") & ~filters.edited)
 async def start(client, message):
     await message.reply(help_text)
 
-app.start()
+bot.start()
 LOGGER.info("JESongBot is online.")
 idle()
